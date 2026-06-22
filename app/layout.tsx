@@ -74,7 +74,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/about">About</Link>
               <Link href="/privacy-policy">Privacy</Link>
               <Link href="/terms">Terms</Link>
-              <Link href="/contact">Contact</Link>
             </nav>
           </div>
         </header>
@@ -106,9 +105,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </li>
                 <li>
                   <Link href="/terms">Terms of Use</Link>
-                </li>
-                <li>
-                  <Link href="/contact">Contact</Link>
                 </li>
               </ul>
             </div>

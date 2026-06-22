@@ -149,7 +149,7 @@ git push origin main
 - `npm run build` passes.
 - `/sitemap.xml` is generated.
 - `/robots.txt` is generated.
-- All calculator, About, Privacy Policy, Terms of Use, and Contact pages load.
+- All calculator, About, Privacy Policy, and Terms of Use pages load.
 - Page titles, meta descriptions, and Open Graph metadata are present.
 - `.env.example` contains placeholders only.
 - No `.env`, `.env.local`, or real secret files are committed.
