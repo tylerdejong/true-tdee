@@ -1,8 +1,8 @@
 # TrueTDEE
 
-TrueTDEE is a static, client-side Next.js calculator website for estimating real-world maintenance calories from calorie intake, body weight trends, steps, and optional wearable data.
+TrueTDEE is a Next.js calculator website for estimating real-world maintenance calories from calorie intake, body weight trends, steps, and optional wearable data.
 
-It does not use accounts, payments, uploads, a database, coaching flows, or health data storage. Calculations run in the browser.
+It does not use accounts, payments, uploads, a database, coaching flows, or health data storage. Calculations run in the browser. Contact form submissions are handled by a server-side API route and stored in Google Sheets.
 
 ## Features
 
@@ -19,7 +19,8 @@ It does not use accounts, payments, uploads, a database, coaching flows, or heal
 - Protein target range
 - Ten SEO landing pages with FAQ schema and internal links
 - AdSense-ready placements below results, mid-article, article bottom, desktop sidebar, and optional sticky mobile footer
-- Static export friendly for Vercel and Cloudflare Pages
+- Contact form for feedback, bug reports, feature requests, and calculation questions
+- Vercel-ready server-side API route for Google Sheets contact submissions
 
 ## Requirements
 
@@ -37,13 +38,13 @@ Open `http://localhost:3000`.
 
 ## Environment Variables
 
-Copy `.env.example` to `.env.local` and replace the placeholder AdSense values when you have approved publisher and ad slot IDs.
+Copy `.env.example` to `.env.local` and replace the placeholder values that are needed for your deployment.
 
 ```bash
 cp .env.example .env.local
 ```
 
-The site works without environment variables. Empty or placeholder AdSense values render visible placement boxes for layout review.
+The calculators work without environment variables. The contact form requires Google Sheets service account variables before it can save submissions.
 
 ## Build
 
@@ -51,9 +52,7 @@ The site works without environment variables. Empty or placeholder AdSense value
 npm run build
 ```
 
-The project uses `output: "export"` in `next.config.mjs`, so a production build creates a static `out/` directory.
-
-Preview the exported site locally with:
+Preview the production build locally with:
 
 ```bash
 npm run start
@@ -61,9 +60,8 @@ npm run start
 
 ## Deploying TrueTDEE
 
-TrueTDEE is ready for static hosting. `next.config.mjs` uses `output: "export"`, so `npm run build`
-creates an `out/` directory containing the production HTML, CSS, JavaScript, sitemap, robots file, and
-assets.
+TrueTDEE is ready for Vercel hosting. The contact form uses a server-side API route, so deploy it as a normal Next.js
+application rather than a static export.
 
 ### Pre-deploy checks
 
@@ -84,13 +82,15 @@ The project should include these deployment files:
 - `tsconfig.json`
 - `app/sitemap.ts`
 - `app/robots.ts`
+- `app/api/contact/route.ts`
+- `lib/googleSheets.ts`
 - `.env.example`
 - `public/favicon.ico`
 - `public/images/truetdee-hero.png`
 
 ### Environment variables
 
-The site works without environment variables. Add these only when the production domain and ad slots are ready.
+Add these in Vercel under **Project Settings > Environment Variables**.
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
@@ -102,9 +102,36 @@ The site works without environment variables. Add these only when the production
 | `NEXT_PUBLIC_AD_SLOT_SIDEBAR` | Optional | AdSense slot for the desktop sidebar placement. |
 | `NEXT_PUBLIC_AD_SLOT_STICKY_MOBILE` | Optional | AdSense slot for the sticky mobile placement. |
 | `NEXT_PUBLIC_ENABLE_STICKY_MOBILE_AD` | Optional | Set to `true` only after reviewing AdSense policy and mobile UX. Defaults to disabled. |
+| `GOOGLE_SHEETS_CLIENT_EMAIL` | Required for contact form | Service account email with edit access to the Google Sheet. |
+| `GOOGLE_SHEETS_PRIVATE_KEY` | Required for contact form | Service account private key. Use escaped newlines as provided by Google or paste it as a multiline Vercel value. |
+| `GOOGLE_SHEETS_SPREADSHEET_ID` | Required for contact form | The Sheet ID from the Google Sheets URL. |
+| `GOOGLE_SHEETS_CONTACT_RANGE` | Required for contact form | Append range. Default: `Contact!A:F`. |
 
-No private server secrets are required because TrueTDEE has no authentication, database, payment system, or backend
-API.
+Do not prefix Google Sheets variables with `NEXT_PUBLIC`. They must stay server-side only.
+
+### Google Sheets contact form setup
+
+1. Create a Google Sheet.
+2. Rename the first tab to `Contact`.
+3. Add these headers in row 1:
+
+```text
+Timestamp | Name | Email | Reason | Message | User Agent
+```
+
+4. Copy the spreadsheet ID from the Sheet URL. It is the long value between `/d/` and `/edit`.
+5. In Google Cloud Console, create or select a project.
+6. Enable **Google Sheets API** for that project.
+7. Go to **IAM & Admin > Service Accounts**.
+8. Create a service account for the TrueTDEE contact form.
+9. Create a JSON key for that service account.
+10. Copy `client_email` into `GOOGLE_SHEETS_CLIENT_EMAIL`.
+11. Copy `private_key` into `GOOGLE_SHEETS_PRIVATE_KEY`. If storing it on one line, keep escaped newlines as `\n`.
+12. Open the Google Sheet and share it with the service account email using **Editor** access.
+13. Set `GOOGLE_SHEETS_SPREADSHEET_ID` to the spreadsheet ID.
+14. Set `GOOGLE_SHEETS_CONTACT_RANGE=Contact!A:F`.
+15. Deploy or redeploy on Vercel.
+16. Test `/contact` with a normal message and confirm a new row appears in the `Contact` tab.
 
 ### GitHub upload steps
 
@@ -135,8 +162,8 @@ git push origin main
 3. Select the **Next.js** framework preset.
 4. Set the root directory to the repository root.
 5. Use build command `npm run build`.
-6. Use output directory `out`.
-7. Add the environment variables above if ads or a custom production URL are ready.
+6. Leave the output directory unset.
+7. Add the environment variables above.
 8. Click **Deploy**.
 9. After deployment, add the production domain in Vercel and set `NEXT_PUBLIC_SITE_URL` to that exact URL.
 10. Redeploy so sitemap, robots.txt, canonical URLs, and Open Graph metadata use the production domain.
@@ -149,11 +176,13 @@ git push origin main
 - `npm run build` passes.
 - `/sitemap.xml` is generated.
 - `/robots.txt` is generated.
-- All calculator, About, Privacy Policy, and Terms of Use pages load.
+- All calculator, About, Privacy Policy, Terms of Use, and Contact pages load.
+- A `/contact` test submission appears in the Google Sheet.
 - Page titles, meta descriptions, and Open Graph metadata are present.
 - `.env.example` contains placeholders only.
 - No `.env`, `.env.local`, or real secret files are committed.
 - `NEXT_PUBLIC_SITE_URL` matches the final production domain.
+- Google Sheets service account has Editor access to the Sheet.
 - AdSense publisher and slot IDs are added only after approval.
 - Privacy Policy, Terms of Use, disclaimer text, and contact email are reviewed before launch.
 

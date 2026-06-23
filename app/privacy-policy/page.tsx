@@ -67,7 +67,21 @@ export default function PrivacyPolicyPage() {
               <li>Device and browser information, such as browser type, device type, and approximate screen size.</li>
               <li>Anonymous usage data, such as which pages are visited and how visitors interact with the site.</li>
               <li>Cookies where applicable, including analytics or advertising cookies from third-party services.</li>
+              <li>Contact form submissions, including submitted name, email, reason, message, and user agent.</li>
             </ul>
+          </section>
+
+          <section className="content-card">
+            <h2>Contact Form Submissions</h2>
+            <p>
+              If you submit the contact form, TrueTDEE stores the submitted name, email address, reason, message, and
+              user agent in Google Sheets. Contact submissions are used only to respond to feedback, review bug reports,
+              consider feature requests, and improve TrueTDEE.
+            </p>
+            <p>
+              Do not submit sensitive health information, medical records, passwords, payment information, or other
+              sensitive personal information through the contact form.
+            </p>
           </section>
 
           <section className="content-card">
@@ -107,9 +121,10 @@ export default function PrivacyPolicyPage() {
           <section className="content-card">
             <h2>Data Retention</h2>
             <p>
-              Calculator inputs are processed in the browser and are not stored by TrueTDEE on a server. If analytics or
-              advertising services are enabled, those third-party services may retain their own logs or cookie data under
-              their own policies.
+              Calculator inputs are processed in the browser and are not stored by TrueTDEE on a server. Contact form
+              submissions are stored in Google Sheets so feedback, bug reports, and feature requests can be reviewed. If
+              analytics or advertising services are enabled, those third-party services may retain their own logs or
+              cookie data under their own policies.
             </p>
           </section>
 
@@ -119,6 +134,7 @@ export default function PrivacyPolicyPage() {
             <ul>
               <li>Google Analytics for aggregate website measurement.</li>
               <li>Google AdSense for advertising.</li>
+              <li>Google Sheets for storing contact form submissions.</li>
             </ul>
             <p>
               These services are operated by Google and are governed by Google&apos;s own privacy policies and controls.
@@ -130,7 +146,8 @@ export default function PrivacyPolicyPage() {
             <p>
               Depending on where you live, you may have rights to request access, deletion, correction, or restriction
               of personal information. Because TrueTDEE does not use accounts or store calculator inputs, many requests
-              may relate to analytics or advertising data controlled by third-party services.
+              may relate to contact form submissions or to analytics and advertising data controlled by third-party
+              services.
             </p>
             <p>For privacy requests, contact: privacy@truetdee.com</p>
           </section>

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { seoPages } from "@/data/pages";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://truetdee.com";
-const staticPages = ["/about", "/privacy-policy", "/terms"];
+const staticPages = ["/about", "/privacy-policy", "/terms", "/contact"];
 
 export const dynamic = "force-static";
 

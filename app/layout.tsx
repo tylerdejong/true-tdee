@@ -6,6 +6,7 @@ import { seoPages } from "@/data/pages";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://truetdee.com";
+const googleTagId = "G-9B3YYTTX48";
 const adClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 const adsEnabled = Boolean(adClient && !adClient.includes("000000"));
 
@@ -49,18 +50,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9B3YYTTX48"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+        <Script async src={`https://www.googletagmanager.com/gtag/js?id=${googleTagId}`} strategy="afterInteractive" />
+        <Script id="google-tag" strategy="afterInteractive">
+          {`
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-9B3YYTTX48');
-`
-          }}
-        />
+  gtag('config', '${googleTagId}');
+`}
+        </Script>
       </head>
       <body>
         {adsEnabled && (
@@ -89,6 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/about">About</Link>
               <Link href="/privacy-policy">Privacy</Link>
               <Link href="/terms">Terms</Link>
+              <Link href="/contact">Contact</Link>
             </nav>
           </div>
         </header>
@@ -120,6 +120,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </li>
                 <li>
                   <Link href="/terms">Terms of Use</Link>
+                </li>
+                <li>
+                  <Link href="/contact">Contact</Link>
                 </li>
               </ul>
             </div>

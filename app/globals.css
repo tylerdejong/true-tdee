@@ -1099,13 +1099,57 @@ details p {
   font-weight: 800;
 }
 
-.form-success {
+.form-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.form-success,
+.form-error,
+.privacy-note {
   padding: 12px;
-  border: 1px solid rgba(47, 111, 94, 0.28);
   border-radius: 8px;
+}
+
+.form-success {
+  border: 1px solid rgba(47, 111, 94, 0.28);
   background: var(--mint);
   color: var(--moss);
   font-weight: 720;
+}
+
+.form-error {
+  border: 1px solid rgba(218, 107, 87, 0.34);
+  background: #fff3ef;
+  color: #8f3828;
+  font-weight: 720;
+}
+
+.privacy-note {
+  border: 1px solid #dbe7eb;
+  background: #fbfdfe;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.field-error,
+.field-help {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.field-error {
+  color: #9b3d2d;
+  font-weight: 760;
+}
+
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .contact-aside {
