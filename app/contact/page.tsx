@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ContactForm } from "@/components/ContactForm";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 const title = "Contact TrueTDEE";
 const description =
@@ -10,13 +11,13 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: {
-    canonical: "/contact"
+    canonical: `${SITE_URL}/contact`
   },
   openGraph: {
     title,
     description,
-    url: "/contact",
-    siteName: "TrueTDEE",
+    url: `${SITE_URL}/contact`,
+    siteName: SITE_NAME,
     images: [
       {
         url: "/images/truetdee-hero.png",
@@ -50,9 +51,6 @@ export default function ContactPage() {
             <p>
               Use this form for site feedback, bug reports, feature requests, and calculation questions. Submissions
               are stored in a private Google Sheet for review.
-            </p>
-            <p className="form-error">
-              The contact form is not currently live. Please do not submit messages until this notice is removed.
             </p>
             <ContactForm />
           </article>

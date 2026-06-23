@@ -3,27 +3,30 @@ import Link from "next/link";
 import Script from "next/script";
 import { StickyMobileAd } from "@/components/AdSlot";
 import { seoPages } from "@/data/pages";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://truetdee.com";
 const googleTagId = "G-9B3YYTTX48";
 const adClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 const adsEnabled = Boolean(adClient && !adClient.includes("000000"));
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "TrueTDEE | Real-World TDEE Calculator",
     template: "%s"
   },
   description:
     "Estimate true maintenance calories from actual calorie intake, weight trends, steps, and optional wearable data.",
+  alternates: {
+    canonical: SITE_URL
+  },
   openGraph: {
     title: "TrueTDEE",
     description:
       "Real-world TDEE calculator using intake, weight trends, steps, and optional wearable data.",
-    url: siteUrl,
-    siteName: "TrueTDEE",
+    url: SITE_URL,
+    siteName: SITE_NAME,
     images: [
       {
         url: "/images/truetdee-hero.png",

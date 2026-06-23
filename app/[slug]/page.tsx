@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArticlePage } from "@/components/ArticlePage";
 import { getPageBySlug, seoPages } from "@/data/pages";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -25,13 +26,13 @@ export async function generateMetadata({ params }: SlugPageProps): Promise<Metad
     title: page.metaTitle,
     description: page.metaDescription,
     alternates: {
-      canonical: `/${page.slug}`
+      canonical: `${SITE_URL}/${page.slug}`
     },
     openGraph: {
       title: page.metaTitle,
       description: page.metaDescription,
-      url: `/${page.slug}`,
-      siteName: "TrueTDEE",
+      url: `${SITE_URL}/${page.slug}`,
+      siteName: SITE_NAME,
       images: [
         {
           url: "/images/truetdee-hero.png",

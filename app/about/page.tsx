@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 const title = "About TrueTDEE";
 const description =
@@ -9,13 +10,13 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: {
-    canonical: "/about"
+    canonical: `${SITE_URL}/about`
   },
   openGraph: {
     title,
     description,
-    url: "/about",
-    siteName: "TrueTDEE",
+    url: `${SITE_URL}/about`,
+    siteName: SITE_NAME,
     images: [
       {
         url: "/images/truetdee-hero.png",

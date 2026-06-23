@@ -3,12 +3,14 @@ import Link from "next/link";
 import { AdSlot } from "@/components/AdSlot";
 import { TrueTDEECalculator } from "@/components/TrueTDEECalculator";
 import { getRelatedPages, SeoPage } from "@/data/pages";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export function ArticlePage({ page }: { page: SeoPage }) {
   const relatedPages = getRelatedPages(page.slug);
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": `${SITE_URL}/${page.slug}#faq`,
     mainEntity: page.faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
@@ -21,7 +23,9 @@ export function ArticlePage({ page }: { page: SeoPage }) {
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: "TrueTDEE",
+    "@id": `${SITE_URL}/#webapplication`,
+    name: SITE_NAME,
+    url: SITE_URL,
     applicationCategory: "HealthApplication",
     operatingSystem: "Any",
     offers: {

@@ -94,7 +94,6 @@ Add these in Vercel under **Project Settings > Environment Variables**.
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Recommended | Canonical site URL used for metadata, sitemap, and robots.txt. Example: `https://truetdee.com`. |
 | `NEXT_PUBLIC_ADSENSE_CLIENT` | Optional | Google AdSense publisher ID, such as `ca-pub-...`. Leave blank or use the placeholder until AdSense is approved. |
 | `NEXT_PUBLIC_AD_SLOT_RESULTS` | Optional | AdSense slot for the below-results placement. |
 | `NEXT_PUBLIC_AD_SLOT_MID_ARTICLE` | Optional | AdSense slot for the mid-article placement. |
@@ -165,8 +164,8 @@ git push origin main
 6. Leave the output directory unset.
 7. Add the environment variables above.
 8. Click **Deploy**.
-9. After deployment, add the production domain in Vercel and set `NEXT_PUBLIC_SITE_URL` to that exact URL.
-10. Redeploy so sitemap, robots.txt, canonical URLs, and Open Graph metadata use the production domain.
+9. After deployment, add `https://truetdee.fitness` as the production domain in Vercel.
+10. Redeploy so sitemap, robots.txt, canonical URLs, and Open Graph metadata are regenerated.
 
 ### Final pre-launch checklist
 
@@ -181,7 +180,7 @@ git push origin main
 - Page titles, meta descriptions, and Open Graph metadata are present.
 - `.env.example` contains placeholders only.
 - No `.env`, `.env.local`, or real secret files are committed.
-- `NEXT_PUBLIC_SITE_URL` matches the final production domain.
+- `lib/site.ts` uses `https://truetdee.fitness`.
 - Google Sheets service account has Editor access to the Sheet.
 - AdSense publisher and slot IDs are added only after approval.
 - Privacy Policy, Terms of Use, disclaimer text, and contact email are reviewed before launch.

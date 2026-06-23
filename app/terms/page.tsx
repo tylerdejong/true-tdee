@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 const title = "Terms of Use | TrueTDEE";
 const description =
@@ -9,13 +10,13 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: {
-    canonical: "/terms"
+    canonical: `${SITE_URL}/terms`
   },
   openGraph: {
     title,
     description,
-    url: "/terms",
-    siteName: "TrueTDEE",
+    url: `${SITE_URL}/terms`,
+    siteName: SITE_NAME,
     images: [
       {
         url: "/images/truetdee-hero.png",
@@ -118,7 +119,7 @@ export default function TermsPage() {
           <section className="content-card">
             <h2>Contact Information</h2>
             <p>
-              Questions about these terms can be sent to hello@truetdee.com.
+              Questions about these terms can be sent to hello@truetdee.fitness.
             </p>
           </section>
         </article>

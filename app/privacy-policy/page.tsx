@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 const title = "Privacy Policy | TrueTDEE";
 const description =
@@ -9,13 +10,13 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: {
-    canonical: "/privacy-policy"
+    canonical: `${SITE_URL}/privacy-policy`
   },
   openGraph: {
     title,
     description,
-    url: "/privacy-policy",
-    siteName: "TrueTDEE",
+    url: `${SITE_URL}/privacy-policy`,
+    siteName: SITE_NAME,
     images: [
       {
         url: "/images/truetdee-hero.png",
@@ -149,13 +150,13 @@ export default function PrivacyPolicyPage() {
               may relate to contact form submissions or to analytics and advertising data controlled by third-party
               services.
             </p>
-            <p>For privacy requests, contact: privacy@truetdee.com</p>
+            <p>For privacy requests, contact: privacy@truetdee.fitness</p>
           </section>
 
           <section className="content-card">
             <h2>Contact</h2>
             <p>
-              Questions about this Privacy Policy can be sent to privacy@truetdee.com.
+              Questions about this Privacy Policy can be sent to privacy@truetdee.fitness.
             </p>
           </section>
         </article>
