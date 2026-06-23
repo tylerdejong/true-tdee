@@ -51,6 +51,9 @@ export default function ContactPage() {
               Use this form for site feedback, bug reports, feature requests, and calculation questions. Submissions
               are stored in a private Google Sheet for review.
             </p>
+            <p className="form-error">
+              The contact form is not currently live. Please do not submit messages until this notice is removed.
+            </p>
             <ContactForm />
           </article>
 
